@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaCode } from "react-icons/fa";
 import { API_URL, API_KEY, IMAGE_BASE_URL } from "../../Config";
 import MainImage from "./Sections/MainImage";
+import GridCards from "../commons/GridCards";
+import { Row } from "antd";
 
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
@@ -36,6 +38,15 @@ function LandingPage() {
         <hr />
 
         {/* Movie Grid Cards */}
+        <Row>
+          {Movies &&
+            Movies.map((movie, index) => {
+              <React.Fragment key={index}>
+                <GridCards />
+              </React.Fragment>;
+            })}
+          ;
+        </Row>
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
