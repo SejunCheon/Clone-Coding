@@ -8,19 +8,33 @@ import { Row } from "antd";
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
   const [MainMovieImage, setMainMovieImage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
+    fetchMovies(endPoint);
+  }, []);
+
+  const fetchMovies = (endPoint) => {
     fetch(endPoint)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
 
-        setMovies([...response.results]);
+        setMovies([...Movies, ...response.results]);
         setMainMovieImage(response.results[0]);
+        setCurrentPage(response.page);
       });
-  }, []);
+  };
+
+  const loadMoreItems = () => {
+    const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
+      currentPage + 1
+    }`;
+
+    fetchMovies(endPoint);
+  };
 
   return (
     <div style={{ width: "100%", margin: "0" }}>
@@ -38,19 +52,26 @@ function LandingPage() {
         <hr />
 
         {/* Movie Grid Cards */}
-        <Row>
+        <Row gutter={[16, 16]}>
           {Movies &&
-            Movies.map((movie, index) => {
+            Movies.map((movie, index) => (
               <React.Fragment key={index}>
-                <GridCards />
-              </React.Fragment>;
-            })}
-          ;
+                <GridCards
+                  image={
+                    movie.poster_path
+                      ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
+                      : null
+                  }
+                  movieId={movie.id}
+                  movieName={movie.original_title}
+                />
+              </React.Fragment>
+            ))}
         </Row>
       </div>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>Load More</button>
+        <button onClick={loadMoreItems}>Load More</button>
       </div>
     </div>
   );
