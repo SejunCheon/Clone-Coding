@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaCode } from "react-icons/fa";
 import { API_URL, API_KEY, IMAGE_BASE_URL } from "../../Config";
 import MainImage from "./Sections/MainImage";
+import axios from "axios";
 import GridCards from "../commons/GridCards";
 import { Row } from "antd";
 
@@ -54,9 +55,11 @@ function LandingPage() {
         {/* Movie Grid Cards */}
         <Row gutter={[16, 16]}>
           {Movies &&
+            // Movies가 있으면 아래가 작동 false면 건너 뛴다
             Movies.map((movie, index) => (
               <React.Fragment key={index}>
                 <GridCards
+                  LandingPage
                   image={
                     movie.poster_path
                       ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
