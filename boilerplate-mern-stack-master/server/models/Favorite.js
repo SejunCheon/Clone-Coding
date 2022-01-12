@@ -17,11 +17,11 @@ const favoriteSchema = mongoose.Schema(
     moviePost: {
       type: String,
     },
-    movieRuntime: {
+    movieRunTime: {
       type: String,
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 ); // 생성된 시간을 자동으로 처리해준다
 
 const Favorite = mongoose.model("Favorite", favoriteSchema);

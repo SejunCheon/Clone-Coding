@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "antd";
 
 function Favorite(props) {
   const movieId = props.movieId;
@@ -12,12 +13,15 @@ function Favorite(props) {
   const [FavoriteNumber, setFavoriteNumber] = useState(0);
   const [Favorited, setFavorited] = useState(false);
 
-  useEffect(() => {
-    let variables = {
-      userFrom, // 유저 정보
-      movieId, // 좋아하는 영화id
-    };
+  let variables = {
+    userFrom: userFrom, // 유저 정보
+    movieId: movieId, // 좋아하는 영화id
+    movieTitle: movieTitle,
+    moviePost: moviePost,
+    movieRunTime: movieRunTime,
+  };
 
+  useEffect(() => {
     // 얼마나 많은 사람이 이 영화를 Favorite 리스트에 넣었는지 그 숫자 정보 얻기 fetch, axios를 쓸 수있다
     axios.post("/api/favorite/favoriteNumber", variables).then((response) => {
       console.log(response.data);
@@ -38,11 +42,35 @@ function Favorite(props) {
     });
   }, []);
 
+  const onClickFavorite = () => {
+    if (Favorited) {
+      axios
+        .post("/api/favorite/removeFromFavorite", variables)
+        .then((response) => {
+          if (response.data.success) {
+            setFavoriteNumber(FavoriteNumber - 1);
+            setFavorited(!Favorited);
+          } else {
+            alert("Favorite 리스트에서 지우는 걸 실패했습니다.");
+          }
+        });
+    } else {
+      axios.post("/api/favorite/addToFavorite", variables).then((response) => {
+        if (response.data.success) {
+          setFavoriteNumber(FavoriteNumber + 1);
+          setFavorited(!Favorited);
+        } else {
+          alert("Favorite 리스트에서 추가하는 걸 실패했습니다.");
+        }
+      });
+    }
+  };
+
   return (
     <div>
-      <button>
+      <Button onClick={onClickFavorite}>
         {Favorited ? "Not Favorited" : "Add to Favorite"} {FavoriteNumber}
-      </button>
+      </Button>
     </div>
   );
 }
