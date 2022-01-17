@@ -36,6 +36,10 @@ app.get("/", (req, res) => {
   res.send("Hello World! 라고할뻔 ㅋ  ㅋ");
 });
 
+app.get("/api/hello", (req, res) => {
+  res.send("hello~");
+});
+
 app.post("/api/users/register", (req, res) => {
   // 회원가입 할때 필요한 정보들을 Client에서 가져오면
   // 그것들을 데이터베이스에 넣어준다.
@@ -94,6 +98,13 @@ app.get("/api/users/auth", auth, (req, res) => {
     lastName: req.user.lastName,
     role: req.user.role,
     image: req.user.image,
+  });
+});
+
+app.get("/api/users/logout", auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({ success: true });
   });
 });
 

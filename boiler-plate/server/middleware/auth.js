@@ -1,4 +1,4 @@
-const { User } = require("./models/Users");
+const { User } = require("../models/User");
 
 let auth = (req, res, next) => {
   // 인증 처리를 하는곳
@@ -14,12 +14,8 @@ let auth = (req, res, next) => {
     // token과 user정보를 request에 담아서 index에서 사용할수있다.
     req.token = token;
     req.user = user;
-    next()
+    next();
   });
-
-  // 유저가 있으면 인증 Okay
-
-  // 유저가 없으면 인증 No
 };
 
 module.exports = { auth };
