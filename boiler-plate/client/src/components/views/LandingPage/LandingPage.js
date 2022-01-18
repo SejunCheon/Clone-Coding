@@ -9,10 +9,16 @@ function LandingPage() {
     });
   }, []);
   return (
-    <div>
-      <h1>이곳은 LandingPage입니다.</h1>
-      <p>뿌지직</p>
-      <Link to="/login">로그인</Link>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <h2>시작 페이지</h2>
     </div>
   );
 }

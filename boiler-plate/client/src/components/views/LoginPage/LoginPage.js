@@ -1,11 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../_actions/user_action";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+
+  const onEmailHandler = (e) => {
+    setEmail(e.currentTarget.value);
+  };
+
+  const onPasswordHandler = (e) => {
+    setPassword(e.currentTarget.value);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    let body = {
+      email: Email,
+      password: Password,
+    };
+
+    dispatch(loginUser(body));
+  };
+
   return (
-    <div>
-      <h1>로그인페이지</h1>
-      <Link to="/">돌아가기</Link>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <form
+        style={{ display: "flex", flexDirection: "column" }}
+        onSubmit={onSubmitHandler}
+      >
+        <label>Email</label>
+        <input type="email" value={Email} onChange={onEmailHandler} />
+        <label>Password</label>
+        <input type="password" value={Password} onChange={onPasswordHandler} />
+        <br />
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
