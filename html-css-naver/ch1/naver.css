@@ -1,0 +1,51 @@
+/* 선택자(selector) */
+.blind {
+  /* 웹에는 안보이고 스크린리더기에는 읽힘*/
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+#header-center {
+  margin: 0 auto;
+  width: 1080px;
+}
+
+#header-search a {
+  text-decoration: none;
+}
+
+#header-search h1 {
+  width: 198px;
+  height: 48px;
+  display: inline-block;
+  /* background-image: url(./sp_search.png);
+  background-position: -4px -10px;
+  background-repeat: no-repeat; */
+  background: url(./sp_search.png) -4px -10px no-repeat;
+  /* text-indent: 100%;
+  overflow: hidden; */
+}
+
+#header-search h1 span {
+  display: none;
+}
+
+#header-search h2 {
+  display: none;
+}
+
+#header-search fieldset {
+  margin-left: 20px;
+  /* padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 12px;
+  padding-right: 0px; */
+  padding: 12px 0 12px 12px;
+  width: 521px;
+  height: 49px;
+  display: inline-block;
+}
