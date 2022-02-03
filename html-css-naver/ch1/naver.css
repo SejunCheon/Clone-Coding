@@ -13,9 +13,29 @@
   overflow: hidden;
 }
 
-#header-center {
+.center-align {
   margin: 0 auto;
   width: 1080px;
+}
+
+header {
+  height: 170px;
+}
+
+#header-top {
+  float: right;
+}
+
+#header-top span {
+  color: #888;
+  letter-spacing: -1px;
+  font-size: 11px;
+  line-height: 22px;
+}
+
+#header-search {
+  clear: both;
+  padding-top: 20px;
 }
 
 #header-search a {
@@ -44,7 +64,7 @@
 }
 
 #header-search fieldset {
-  margin-left: 20px;
+  margin-left: 18px;
   /* padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 12px;
@@ -53,7 +73,7 @@
   width: 521px;
   height: 49px;
   display: inline-block;
-  border: 2px solid #03cf5d;
+  border: 3px solid #03cf5d;
   vertical-align: middle;
   position: relative;
 }
@@ -85,7 +105,11 @@
   width: 21px;
   height: 21px;
   display: inline-block;
-  margin: 14px;
+  /* margin: 14px; */
+  position: absolute;
+  /* top: 50%; */
+  /* left: 50%; */
+  transform: translate(-50%, -50%);
 }
 
 /* 
@@ -93,3 +117,78 @@
   position: relative;
   bottom: 6px;
 } */
+
+nav {
+  height: 46px;
+  border-top: 1px solid #f1f3f6;
+  position: relative;
+}
+
+nav ul {
+  display: inline-block;
+  margin: 0;
+  padding: 16px 0 0 4px;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+
+nav li span:first-child {
+  display: inline-block;
+  height: 16px;
+  background-image: url(./sp_nav.png);
+  background-repeat: no-repeat;
+  margin-left: 14px;
+}
+
+nav li:first-child span:first-child {
+  width: 25px;
+  background-position: 0 -285px;
+  margin-left: 0;
+}
+
+nav li:nth-child(2) span:first-child {
+  width: 27px;
+  background-position: -279px -52px;
+}
+
+nav li:nth-child(3) span:first-child {
+  width: 40px;
+  background-position: -100px -182px;
+}
+
+nav li:nth-child(4) span:first-child {
+  width: 40px;
+  background-position: -101px -156px;
+}
+
+nav li:nth-child(5) span:first-child {
+  width: 26px;
+  background-position: -279px -156px;
+}
+
+nav li:nth-child(6) span:first-child {
+  width: 25px;
+  background-position: -70px -285px;
+}
+
+.nav-divider {
+  display: inline-block;
+  margin: 18px 16px 0;
+  width: 1px;
+  height: 14px;
+  background: #ebeef3;
+}
+
+#search-ranking {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+}
+
+#rank-number {
+  margin-top: -9px;
+  color: #00ab33;
+  font-size: 16px;
+}
